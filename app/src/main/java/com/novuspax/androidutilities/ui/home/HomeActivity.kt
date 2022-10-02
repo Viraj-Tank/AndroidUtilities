@@ -8,6 +8,7 @@ import com.novuspax.androidutilities.R
 import com.novuspax.androidutilities.databinding.ActivityHomeBinding
 import com.novuspax.androidutilities.databinding.ActivityStorageMainBinding
 import com.novuspax.androidutilities.ui.mainActivity.StorageMainActivity
+import com.novuspax.androidutilities.ui.qr_creator.QRMainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,9 +38,9 @@ class HomeActivity : AppCompatActivity() {
                 startActivity(Intent(this@HomeActivity, StorageMainActivity::class.java))
             }
             "qr" -> {
-                startActivity(Intent(this@HomeActivity, StorageMainActivity::class.java))
+                startActivity(Intent(this@HomeActivity, QRMainActivity::class.java))
             }
-            else ->{
+            else -> {
                 print("no id found!")
             }
         }

@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/activity_generate_qractivity.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_qr_main.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/activity_scan_qractivity.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_storage_detail.xml" value="0.14402173913043478" />
         <entry key="app/src/main/res/layout/activity_storage_main.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/inflater_home_item.xml" value="0.19610507246376813" />
