@@ -23,9 +23,6 @@
             android:name=".ui.qr_creator.ScanQRActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.qr_creator.GenerateQRActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.qr_creator.QRMainActivity"
             android:exported="false" />
         <activity
