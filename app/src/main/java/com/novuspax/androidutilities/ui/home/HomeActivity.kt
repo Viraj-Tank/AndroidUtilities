@@ -40,6 +40,9 @@ class HomeActivity : AppCompatActivity() {
             "qr" -> {
                 startActivity(Intent(this@HomeActivity, QRMainActivity::class.java))
             }
+            "location" -> {
+                startActivity(Intent(this@HomeActivity, LocationMainActivity::class.java))
+            }
             else -> {
                 print("no id found!")
             }
