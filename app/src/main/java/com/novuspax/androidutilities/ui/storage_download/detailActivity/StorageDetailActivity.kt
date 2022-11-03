@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -14,10 +15,15 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
+import androidx.core.graphics.drawable.toBitmap
 import com.bumptech.glide.Glide
 import com.novuspax.androidutilities.databinding.ActivityStorageDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
+import java.io.FileOutputStream
+import java.util.*
+
 
 @AndroidEntryPoint
 class StorageDetailActivity : AppCompatActivity(), View.OnClickListener {
@@ -44,6 +50,7 @@ class StorageDetailActivity : AppCompatActivity(), View.OnClickListener {
         Glide.with(this).load(imageUrl).centerCrop().into(binding.imgRAM)
         binding.btnToFiles.setOnClickListener(this)
         binding.btnDownloadManager.setOnClickListener(this)
+        binding.btnShareImage.setOnClickListener(this)
 
         /***
          *  using broadcast to fire notification when download completes
@@ -66,10 +73,13 @@ class StorageDetailActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view) {
             binding.btnToFiles -> {
-                saveToPrivateFilesFolder()
+                saveToPrivateFilesFolder(binding.imgRAM.drawable.toBitmap())
             }
             binding.btnDownloadManager -> {
                 requestStoragePermission.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+            binding.btnShareImage -> {
+
             }
         }
     }
@@ -93,17 +103,19 @@ class StorageDetailActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun saveToPrivateCacheFolder() {
-//        val file = File(filesDir, "my folder")
-//        if (file.exists().not()) {
-//            file.mkdir()
-//        }
-//        Log.e(TAG, "saveToPrivateCacheFolder: $filesDir")
-
-    }
-
-    private fun saveToPrivateFilesFolder() {
-
+    private fun saveToPrivateFilesFolder(bitmap: Bitmap) {
+        val imageStoreFolder = File(getExternalFilesDir(null), "images")
+        try {
+            imageStoreFolder.mkdirs()
+            val file = File(imageStoreFolder, "${Calendar.getInstance().time.time}.png")
+            val outputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, outputStream)
+            outputStream.flush()
+            outputStream.close()
+            Toast.makeText(this, "success", Toast.LENGTH_LONG).show()
+        } catch (e: java.lang.Exception) {
+            Toast.makeText(this, "cant save image something went wrong" + e.message, Toast.LENGTH_LONG).show()
+        }
     }
 
     private var broadcastReceiver = object : BroadcastReceiver() {
@@ -113,6 +125,16 @@ class StorageDetailActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this@StorageDetailActivity, "Download Complete", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun shareImageWithTextIfExist(bitmap: Bitmap) {
+        val uri = saveToPrivateFilesFolder(bitmap)
+        val intent = Intent(Intent.ACTION_SEND)
+//        intent.putExtra(Intent.EXTRA_STREAM, uri)
+        intent.putExtra(Intent.EXTRA_TEXT, "Sharing Image")
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here")
+        intent.type = "image/*"
+        startActivity(Intent.createChooser(intent, "Share Via"))
     }
 
 }
