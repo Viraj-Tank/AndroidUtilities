@@ -4,7 +4,7 @@
     package="com.novuspax.androidutilities">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -20,22 +20,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidUtilities"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.handleIntent.HandleIntentActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
         <service
             android:name=".utils.QuickTileNotification"
+            android:exported="true"
             android:icon="@drawable/ic_launcher_foreground"
             android:label="Send Notification"
-            android:exported="true"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action
-                    android:name="android.service.quicksettings.action.QS_TILE"/>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
-<!--            <meta-data-->
-<!--                android:name="android.service.quicksettings.ACTIVE_TILE"-->
-<!--                android:value="true" />-->
-            <meta-data android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+            <!-- <meta-data -->
+            <!-- android:name="android.service.quicksettings.ACTIVE_TILE" -->
+            <!-- android:value="true" /> -->
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                 android:value="true" />
         </service>
+
         <activity
             android:name=".ui.home.LocationMainActivity"
             android:exported="false">
@@ -62,6 +71,15 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
     </application>
