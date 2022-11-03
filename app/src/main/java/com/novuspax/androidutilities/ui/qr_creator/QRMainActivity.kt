@@ -7,12 +7,10 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
-import com.novuspax.androidutilities.R
 import com.novuspax.androidutilities.databinding.ActivityQrMainBinding
 import com.novuspax.androidutilities.utils.QRGenerator.QRGContents
 import com.novuspax.androidutilities.utils.QRGenerator.QRGEncoder
-import com.novuspax.androidutilities.utils.sdkAboveR
+import com.novuspax.androidutilities.utils.sdkAbove10
 
 class QRMainActivity : AppCompatActivity(), View.OnClickListener {
     private val binding by lazy {
@@ -39,7 +37,7 @@ class QRMainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view) {
             binding.btnGenerateQR -> {
-                sdkAboveR {
+                sdkAbove10 {
                     val windowMetrics = windowManager.currentWindowMetrics
                     val insets = windowMetrics.windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
                     width = windowMetrics.bounds.width()
