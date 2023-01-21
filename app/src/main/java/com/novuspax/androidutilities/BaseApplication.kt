@@ -4,6 +4,8 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.util.Log
+import com.novuspax.androidutilities.utils.location.LocationHelper
 import com.novuspax.androidutilities.utils.service.CounterNotificationService
 import dagger.hilt.android.HiltAndroidApp
 
@@ -12,6 +14,9 @@ class BaseApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Log.e("TAG", "onCreate: MainOnCreateCalled", )
+        val location = LocationHelper(this)
+//        location.startLocationUpdates(5000)
         createNotificationChannel()
     }
 
