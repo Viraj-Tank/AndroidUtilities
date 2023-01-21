@@ -50,6 +50,6 @@
         android:text="Background Location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGetLocation" />
+        app:layout_constraintTop_toBottomOf="@+id/btnStopLocation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
