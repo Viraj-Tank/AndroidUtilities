@@ -5,9 +5,8 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.paging.*
 import com.novuspax.androidutilities.network.data.RAMResponse
-import com.novuspax.androidutilities.network.retrofit.DispatcherProvider
 import com.novuspax.androidutilities.network.retrofit.MainRepository
-import com.novuspax.androidutilities.utils.ResourceProvider
+import com.novuspax.androidutilities.utils.utility.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.Exception
 import javax.inject.Inject

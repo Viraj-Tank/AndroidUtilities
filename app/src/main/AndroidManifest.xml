@@ -6,8 +6,11 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
@@ -24,6 +27,9 @@
         android:theme="@style/Theme.AndroidUtilities"
         tools:targetApi="31">
         <activity
+            android:name=".ui.camera.CameraActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.handleIntent.HandleIntentActivity"
             android:exported="false">
             <meta-data
@@ -31,8 +37,13 @@
                 android:value="" />
         </activity>
 
+        <service android:name=".utils.location.backgroundfetch.LocationService"
+            android:exported="true"
+            android:foregroundServiceType="location"
+            android:permission="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
         <service
-            android:name=".utils.QuickTileNotification"
+            android:name=".utils.utility.QuickTileNotification"
             android:exported="true"
             android:icon="@drawable/ic_launcher_foreground"
             android:label="Send Notification"

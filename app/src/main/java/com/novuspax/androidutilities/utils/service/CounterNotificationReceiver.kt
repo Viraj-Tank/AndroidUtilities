@@ -3,7 +3,7 @@ package com.novuspax.androidutilities.utils.service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.novuspax.androidutilities.utils.Counter
+import com.novuspax.androidutilities.utils.utility.Counter
 
 class CounterNotificationReceiver : BroadcastReceiver(){
 

@@ -1,25 +1,23 @@
 package com.novuspax.androidutilities.ui.home
 
 import android.annotation.SuppressLint
-import android.app.Service
 import android.content.Intent
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.work.*
 import com.google.android.gms.location.*
-import com.novuspax.androidutilities.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.novuspax.androidutilities.databinding.ActivityLocationMainBinding
+import com.novuspax.androidutilities.utils.location.backgroundfetch.LocationService
 import com.novuspax.androidutilities.utils.location.LocationWorker
-import com.novuspax.androidutilities.utils.location.LocationWorkerWorkManager
 import java.util.concurrent.TimeUnit
 
 
@@ -33,7 +31,7 @@ class LocationMainActivity : AppCompatActivity() {
     private val locationRequest = LocationRequest().apply {
         interval = 5000
         fastestInterval = 5000
-//        priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
 
     private val locationCallback = object : LocationCallback() {
@@ -51,6 +49,7 @@ class LocationMainActivity : AppCompatActivity() {
         setContentView(binding.root)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         createAlertDialog()
+        askForUserPermission()
         binding.btnGetLocation.setOnClickListener {
             val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
             if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -65,8 +64,14 @@ class LocationMainActivity : AppCompatActivity() {
             stopLocationUpdates()
         }
         binding.btnBackgroundLocation.setOnClickListener {
+            ContextCompat.startForegroundService(this, Intent(this, LocationService::class.java))
 
-            val workRequest = OneTimeWorkRequestBuilder<LocationWorkerWorkManager>()
+            /*val serviceInfo = ServiceInfo.Builder(this, MyService::class.java)
+                .setForeground(true)
+                .build()*/
+
+
+            /*val workRequest = OneTimeWorkRequestBuilder<LocationWorkerWorkManager>()
                 .setConstraints(
                     Constraints.Builder()
                         .setRequiresBatteryNotLow(true)
@@ -76,18 +81,30 @@ class LocationMainActivity : AppCompatActivity() {
                 )
                 .build()
 
-            WorkManager.getInstance(this).enqueue(workRequest)
+            WorkManager.getInstance(this).enqueue(workRequest)*/
 
 
             /*val work = PeriodicWorkRequestBuilder<LocationWorker>(5, TimeUnit.SECONDS)
-            .build()
+                .build()
             WorkManager.getInstance(this).enqueue(work)*/
         }
+
+        binding.btnStopBackgroundLocation.setOnClickListener {
+            stopService(Intent(this, LocationService::class.java))
+        }
+    }
+
+    private fun askForUserPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            listOf(android.Manifest.permission.ACCESS_BACKGROUND_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION).toTypedArray(),
+            123
+        )
     }
 
     private fun createAlertDialog() {
         alert = AlertDialog.Builder(this).apply {
-            title  = "GPS is turned off"
+            title = "GPS is turned off"
             setMessage("To use this feature, please turn on GPS")
             setPositiveButton("Turn on") { _, _ ->
                 val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)

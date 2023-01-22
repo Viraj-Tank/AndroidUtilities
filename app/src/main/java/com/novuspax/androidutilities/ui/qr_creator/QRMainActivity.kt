@@ -10,7 +10,7 @@ import android.view.WindowManager
 import com.novuspax.androidutilities.databinding.ActivityQrMainBinding
 import com.novuspax.androidutilities.utils.QRGenerator.QRGContents
 import com.novuspax.androidutilities.utils.QRGenerator.QRGEncoder
-import com.novuspax.androidutilities.utils.sdkAbove10
+import com.novuspax.androidutilities.utils.utility.sdkAbove10
 
 class QRMainActivity : AppCompatActivity(), View.OnClickListener {
     private val binding by lazy {

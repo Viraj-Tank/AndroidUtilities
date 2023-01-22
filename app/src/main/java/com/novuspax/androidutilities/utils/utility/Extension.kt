@@ -1,13 +1,8 @@
-package com.novuspax.androidutilities.utils
+package com.novuspax.androidutilities.utils.utility
 
-import android.app.DownloadManager
-import android.app.Service
-import android.content.Context
 import android.net.Uri
 import android.os.Build
-import android.os.Environment
 import android.os.Parcelable
-import android.util.Log
 
 inline fun <T> sdkAbove10(aboveAndroid10: () -> T?): T? {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

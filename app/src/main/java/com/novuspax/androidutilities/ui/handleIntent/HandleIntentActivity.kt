@@ -1,6 +1,5 @@
 package com.novuspax.androidutilities.ui.handleIntent
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -8,10 +7,8 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.novuspax.androidutilities.R
 import com.novuspax.androidutilities.databinding.ActivityHandleIntentBinding
-import com.novuspax.androidutilities.utils.getURIsFromList
+import com.novuspax.androidutilities.utils.utility.getURIsFromList
 
 class HandleIntentActivity : AppCompatActivity() {
 

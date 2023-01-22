@@ -1,4 +1,4 @@
-package com.novuspax.androidutilities.utils
+package com.novuspax.androidutilities.utils.utility
 
 import android.content.Intent
 import android.os.IBinder

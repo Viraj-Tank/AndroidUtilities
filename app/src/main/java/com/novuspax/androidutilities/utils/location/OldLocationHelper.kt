@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.Log
 import com.google.android.gms.location.*
 
-class LocationHelper(context: Context) {
+class OldLocationHelper(context: Context) {
 
     private val fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
     private val locationCallback: LocationCallback = object : LocationCallback() {

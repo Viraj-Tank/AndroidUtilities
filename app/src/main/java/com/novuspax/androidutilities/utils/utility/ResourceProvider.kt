@@ -1,4 +1,4 @@
-package com.novuspax.androidutilities.utils
+package com.novuspax.androidutilities.utils.utility
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext

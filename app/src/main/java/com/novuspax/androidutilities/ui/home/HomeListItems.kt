@@ -4,4 +4,5 @@ val homeItems = listOf(
     Pair("storage","Storage / Download"),
     Pair("qr","QR Generator"),
     Pair("location","Current Location"),
+    Pair("cam","Camera"),
 )
